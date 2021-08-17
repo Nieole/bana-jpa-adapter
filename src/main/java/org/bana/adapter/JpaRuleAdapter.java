@@ -111,25 +111,25 @@ public class JpaRuleAdapter implements Adapter {
     if (StringUtils.hasText(rule.get(0))) {
       jpaRule.setV0(rule.get(0));
     }
-    if (rule.size() >= 1 && StringUtils.hasText(rule.get(1))) {
+    if (rule.size() > 1 && StringUtils.hasText(rule.get(1))) {
       jpaRule.setV1(rule.get(1));
     }
-    if (rule.size() >= 2 && StringUtils.hasText(rule.get(2))) {
+    if (rule.size() > 2 && StringUtils.hasText(rule.get(2))) {
       jpaRule.setV2(rule.get(2));
     }
-    if (rule.size() >= 3 && StringUtils.hasText(rule.get(3))) {
+    if (rule.size() > 3 && StringUtils.hasText(rule.get(3))) {
       jpaRule.setV3(rule.get(3));
     }
-    if (rule.size() >= 4 && StringUtils.hasText(rule.get(4))) {
+    if (rule.size() > 4 && StringUtils.hasText(rule.get(4))) {
       jpaRule.setV4(rule.get(4));
     }
-    if (rule.size() >= 5 && StringUtils.hasText(rule.get(5))) {
+    if (rule.size() > 5 && StringUtils.hasText(rule.get(5))) {
       jpaRule.setV5(rule.get(5));
     }
-    if (rule.size() >= 6 && StringUtils.hasText(rule.get(6))) {
+    if (rule.size() > 6 && StringUtils.hasText(rule.get(6))) {
       jpaRule.setV6(rule.get(6));
     }
-    if (rule.size() >= 7 && StringUtils.hasText(rule.get(7))) {
+    if (rule.size() > 7 && StringUtils.hasText(rule.get(7))) {
       jpaRule.setV7(rule.get(7));
     }
     jpaRuleRepository.save(jpaRule);

@@ -5,7 +5,9 @@ import org.bana.adapter.DataAdapter;
 import org.bana.entity.RoleEntity;
 import org.bana.entity.User;
 import org.casbin.jcasbin.main.Enforcer;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class JpaUserService extends UserService<User, String> {
 
   public <R extends RoleEntity<RI>, RI extends Serializable> JpaUserService(

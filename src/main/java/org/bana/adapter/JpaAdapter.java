@@ -14,6 +14,10 @@ public abstract class JpaAdapter<DATA extends BaseEntity<ID>, ID extends Seriali
     this.repository = repository;
   }
 
+  public JpaRepository<DATA, ID> getRepository() {
+    return repository;
+  }
+
   @Override
   public boolean save(DATA data) {
     repository.save(data);

@@ -5,7 +5,9 @@ import org.bana.adapter.DataAdapter;
 import org.bana.entity.PermissionEntity;
 import org.bana.entity.Role;
 import org.casbin.jcasbin.main.Enforcer;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class JpaRoleService extends RoleService<Role, String> {
 
   public <E extends PermissionEntity<I>, I extends Serializable> JpaRoleService(
