@@ -1,6 +1,5 @@
 package org.bana.entity;
 
-import io.vavr.collection.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,10 +22,5 @@ public class JpaRule extends CasbinRule<String> {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  @Override
-  public List<String> toPolicy() {
-    return super.toPolicy();
   }
 }
