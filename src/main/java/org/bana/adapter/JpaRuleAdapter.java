@@ -16,13 +16,13 @@ import org.casbin.jcasbin.model.Model;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-public class RuleAdapter implements Adapter {
+public class JpaRuleAdapter implements Adapter {
 
   private final JpaRuleRepository jpaRuleRepository;
   private volatile boolean isFiltered = true;
 
 
-  public RuleAdapter(JpaRuleRepository jpaRuleRepository) {
+  public JpaRuleAdapter(JpaRuleRepository jpaRuleRepository) {
     this.jpaRuleRepository = jpaRuleRepository;
   }
 
