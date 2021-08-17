@@ -8,11 +8,11 @@ import org.casbin.jcasbin.main.Enforcer;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public class JpaUserService extends UserService<User, String> {
+public class UserService extends AbstractUserService<User, String> {
 
-  public <R extends RoleEntity<RI>, RI extends Serializable> JpaUserService(
+  public <R extends RoleEntity<RI>, RI extends Serializable> UserService(
       DataAdapter<User, String> dataAdapter,
-      Enforcer enforcer, RoleService<R, RI> roleService) {
+      Enforcer enforcer, AbstractRoleService<R, RI> roleService) {
     super(dataAdapter, enforcer, roleService);
   }
 

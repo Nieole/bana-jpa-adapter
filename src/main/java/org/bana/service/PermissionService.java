@@ -6,9 +6,9 @@ import org.casbin.jcasbin.main.Enforcer;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public class JpaPermissionService extends PermissionService<Permission, String> {
+public class PermissionService extends AbstractPermissionService<Permission, String> {
 
-  public JpaPermissionService(
+  public PermissionService(
       DataAdapter<Permission, String> dataAdapter,
       Enforcer enforcer) {
     super(dataAdapter, enforcer);
