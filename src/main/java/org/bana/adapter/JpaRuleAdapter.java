@@ -16,13 +16,13 @@ import org.casbin.jcasbin.model.Model;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-public class JpaAdapter implements Adapter {
+public class JpaRuleAdapter implements Adapter {
 
   private final JpaRuleRepository jpaRuleRepository;
   private volatile boolean isFiltered = true;
 
 
-  public JpaAdapter(JpaRuleRepository jpaRuleRepository) {
+  public JpaRuleAdapter(JpaRuleRepository jpaRuleRepository) {
     this.jpaRuleRepository = jpaRuleRepository;
   }
 
@@ -45,9 +45,7 @@ public class JpaAdapter implements Adapter {
             } else {
               return Collections.<List<String>>emptyList();
             }
-          }).forEach((k, v) -> {
-            model.model.get(k.substring(0, 1)).get(k).policy.addAll(v);
-          });
+          }).forEach((k, v) -> model.model.get(k.substring(0, 1)).get(k).policy.addAll(v));
       isFiltered = true;
     } catch (Exception e) {
       e.printStackTrace();
