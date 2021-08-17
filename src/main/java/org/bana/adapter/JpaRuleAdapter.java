@@ -1,16 +1,12 @@
 package org.bana.adapter;
 
-import io.vavr.collection.Traversable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import javax.persistence.criteria.Predicate;
 import org.bana.entity.JpaRule;
 import org.bana.entity.Rule;
 import org.bana.repository.JpaRuleRepository;
-import org.casbin.jcasbin.exception.CasbinAdapterException;
 import org.casbin.jcasbin.model.Assertion;
 import org.casbin.jcasbin.model.Model;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,79 +17,13 @@ public class JpaRuleAdapter implements Adapter {
   private final JpaRuleRepository jpaRuleRepository;
   private volatile boolean isFiltered = true;
 
-
   public JpaRuleAdapter(JpaRuleRepository jpaRuleRepository) {
     this.jpaRuleRepository = jpaRuleRepository;
   }
 
   @Override
-  public void loadFilteredPolicy(Model model, Object filter) throws CasbinAdapterException {
-    if (Objects.isNull(filter)) {
-      loadPolicy(model);
-      return;
-    }
-    if (!(filter instanceof Filter)) {
-      throw new CasbinAdapterException("Invalid filter type.");
-    }
-    try {
-      io.vavr.collection.List.ofAll(jpaRuleRepository.findAll())
-          .distinct()
-          .map(JpaRule::toPolicy)
-          .toMap(Traversable::head, list -> {
-            if (!filterCasbinRule(list, (Filter) filter)) {
-              return Collections.singletonList(list.tail().toJavaList());
-            } else {
-              return Collections.<List<String>>emptyList();
-            }
-          }).forEach((k, v) -> model.model.get(k.substring(0, 1)).get(k).policy.addAll(v));
-      isFiltered = true;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
-  private boolean filterCasbinRule(io.vavr.collection.List<String> policy, Filter filter) {
-    String[] filterSlice = new String[]{};
-    switch (policy.get(0)) {
-      case "p":
-        filterSlice = filter.p;
-        break;
-      case "g":
-        filterSlice = filter.g;
-        break;
-      default:
-        break;
-    }
-    return filterWords(policy, filterSlice);
-  }
-
-  private boolean filterWords(io.vavr.collection.List<String> policy, String[] filter) {
-    boolean skipLine = false;
-    for (int i = 0; i < filter.length; i++) {
-      if (filter[i].length() > 0 && !Objects.equals(filter[i].trim(), policy.get(i))) {
-        skipLine = true;
-        break;
-      }
-    }
-    return skipLine;
-  }
-
-  @Override
   public boolean isFiltered() {
     return isFiltered;
-  }
-
-  @Transactional(readOnly = true)
-  @Override
-  public void loadPolicy(Model model) {
-    io.vavr.collection.List.ofAll(
-            jpaRuleRepository.findAll())
-        .distinct()
-        .map(Rule::toPolicy)
-        .toMap(io.vavr.collection.List::head, list -> Collections.singletonList(
-            list.tail().toJavaList()))
-        .forEach((k, v) -> model.model.get(k.substring(0, 1)).get(k).policy.addAll(v));
-    isFiltered = false;
   }
 
   @Override
@@ -136,12 +66,8 @@ public class JpaRuleAdapter implements Adapter {
   }
 
   @Override
-  @Transactional
-  public void removePolicy(String sec, String ptype, List<String> rule) {
-    if (rule.isEmpty()) {
-      return;
-    }
-    removeFilteredPolicy(sec, ptype, 0, rule.toArray(new String[0]));
+  public List<? extends Rule> loadAllRule() {
+    return jpaRuleRepository.findAll();
   }
 
   @Override
@@ -169,6 +95,11 @@ public class JpaRuleAdapter implements Adapter {
         .flatMap(Map::values)
         .flatMap(this::rule)
         .toJavaList();
+  }
+
+  @Override
+  public void setIsFiltered(Boolean isFiltered ) {
+    this.isFiltered = isFiltered;
   }
 
   private io.vavr.collection.List<JpaRule> rule(Assertion assertion) {
@@ -204,14 +135,4 @@ public class JpaRuleAdapter implements Adapter {
           return rule;
         });
   }
-
-  /**
-   * the filter class. Enforcer only accept this filter currently.
-   */
-  public static class Filter {
-
-    public String[] p;
-    public String[] g;
-  }
-
 }
