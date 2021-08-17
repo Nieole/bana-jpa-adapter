@@ -4,7 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Permission extends PermissionEntity<String>{
+public class Permission extends PermissionEntity<String> {
+
   @Id
   private String id;
 

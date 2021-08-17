@@ -6,7 +6,7 @@ import org.bana.entity.RoleEntity;
 import org.bana.entity.User;
 import org.casbin.jcasbin.main.Enforcer;
 
-public class JpaUserService extends UserService<User,String>{
+public class JpaUserService extends UserService<User, String> {
 
   public <R extends RoleEntity<RI>, RI extends Serializable> JpaUserService(
       DataAdapter<User, String> dataAdapter,

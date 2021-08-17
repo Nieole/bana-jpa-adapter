@@ -4,7 +4,7 @@ import org.bana.adapter.DataAdapter;
 import org.bana.entity.Permission;
 import org.casbin.jcasbin.main.Enforcer;
 
-public class JpaPermissionService extends PermissionService<Permission,String> {
+public class JpaPermissionService extends PermissionService<Permission, String> {
 
   public JpaPermissionService(
       DataAdapter<Permission, String> dataAdapter,

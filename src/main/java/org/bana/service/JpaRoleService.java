@@ -6,7 +6,7 @@ import org.bana.entity.PermissionEntity;
 import org.bana.entity.Role;
 import org.casbin.jcasbin.main.Enforcer;
 
-public class JpaRoleService extends RoleService<Role,String>{
+public class JpaRoleService extends RoleService<Role, String> {
 
   public <E extends PermissionEntity<I>, I extends Serializable> JpaRoleService(
       DataAdapter<Role, String> dataAdapter,

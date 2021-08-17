@@ -4,7 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Role extends RoleEntity<String>{
+public class Role extends RoleEntity<String> {
+
   @Id
   private String id;
 

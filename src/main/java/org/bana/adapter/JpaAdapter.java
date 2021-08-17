@@ -5,10 +5,12 @@ import java.util.Collection;
 import org.bana.entity.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public abstract class JpaAdapter<DATA extends BaseEntity<ID>,ID extends Serializable> implements DataAdapter<DATA,ID>{
-  private final JpaRepository<DATA,ID> repository;
+public abstract class JpaAdapter<DATA extends BaseEntity<ID>, ID extends Serializable> implements
+    DataAdapter<DATA, ID> {
 
-  public JpaAdapter(JpaRepository<DATA,ID> repository) {
+  private final JpaRepository<DATA, ID> repository;
+
+  public JpaAdapter(JpaRepository<DATA, ID> repository) {
     this.repository = repository;
   }
 

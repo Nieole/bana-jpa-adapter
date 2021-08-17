@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JpaRuleRepository extends JpaRepository<JpaRule, String>,
     JpaSpecificationExecutor<JpaRule> {
+
 }
