@@ -2,17 +2,14 @@ package org.bana.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.criteria.Predicate;
 import org.bana.entity.JpaRule;
-import org.bana.entity.Rule;
 import org.bana.repository.JpaRuleRepository;
 import org.casbin.jcasbin.model.Assertion;
-import org.casbin.jcasbin.model.Model;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-public class JpaRuleAdapter implements Adapter {
+public class JpaRuleAdapter implements Adapter<JpaRule> {
 
   private final JpaRuleRepository jpaRuleRepository;
   private volatile boolean isFiltered = true;
@@ -24,13 +21,6 @@ public class JpaRuleAdapter implements Adapter {
   @Override
   public boolean isFiltered() {
     return isFiltered;
-  }
-
-  @Override
-  @Transactional
-  public void savePolicy(Model model) {
-    jpaRuleRepository.deleteAll();
-    jpaRuleRepository.saveAll(transformToCasbinRule(model));
   }
 
   @Override
@@ -66,8 +56,18 @@ public class JpaRuleAdapter implements Adapter {
   }
 
   @Override
-  public List<? extends Rule> loadAllRule() {
+  public List<JpaRule> loadAllRule() {
     return jpaRuleRepository.findAll();
+  }
+
+  @Override
+  public void deleteAll() {
+    jpaRuleRepository.deleteAll();
+  }
+
+  @Override
+  public void saveAll(List<JpaRule> rules) {
+    jpaRuleRepository.saveAll(rules);
   }
 
   @Override
@@ -90,19 +90,12 @@ public class JpaRuleAdapter implements Adapter {
   }
 
   @Override
-  public List<JpaRule> transformToCasbinRule(Model model) {
-    return io.vavr.collection.List.ofAll(model.model.values())
-        .flatMap(Map::values)
-        .flatMap(this::rule)
-        .toJavaList();
-  }
-
-  @Override
   public void setIsFiltered(Boolean isFiltered ) {
     this.isFiltered = isFiltered;
   }
 
-  private io.vavr.collection.List<JpaRule> rule(Assertion assertion) {
+  @Override
+  public io.vavr.collection.List<JpaRule> transform(Assertion assertion) {
     if (assertion.policy.isEmpty()) {
       return io.vavr.collection.List.empty();
     }
