@@ -9,12 +9,10 @@ public class Permission extends PermissionEntity<String> {
   @Id
   private String id;
 
-  @Override
   public String getId() {
     return id;
   }
 
-  @Override
   public void setId(String id) {
     this.id = id;
   }
