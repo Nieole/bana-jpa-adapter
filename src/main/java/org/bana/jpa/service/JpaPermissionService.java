@@ -2,14 +2,14 @@ package org.bana.jpa.service;
 
 import org.bana.adapter.DataAdapter;
 import org.bana.jpa.entity.Permission;
-import org.bana.service.AbstractPermissionService;
+import org.bana.service.PermissionService;
 import org.casbin.jcasbin.main.Enforcer;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public class PermissionService extends AbstractPermissionService<Permission, String> {
+public class JpaPermissionService extends PermissionService<Permission, String> {
 
-  public PermissionService(
+  public JpaPermissionService(
       DataAdapter<Permission, String> dataAdapter,
       Enforcer enforcer) {
     super(dataAdapter, enforcer);
