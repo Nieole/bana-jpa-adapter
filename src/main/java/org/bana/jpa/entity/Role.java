@@ -13,7 +13,7 @@ public class Role extends RoleEntity<String> {
 
   @Id
   @Column(length = 40)
-  @GenericGenerator(name = "xid",strategy = "org.bana.entity.IdGenerator")
+  @GenericGenerator(name = "xid",strategy = "org.bana.jpa.entity.IdGenerator")
   @GeneratedValue(generator = "xid",strategy = GenerationType.SEQUENCE)
   private String id;
 
