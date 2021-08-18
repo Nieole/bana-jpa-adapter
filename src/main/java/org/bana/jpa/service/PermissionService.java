@@ -1,7 +1,8 @@
-package org.bana.service;
+package org.bana.jpa.service;
 
 import org.bana.adapter.DataAdapter;
-import org.bana.entity.Permission;
+import org.bana.jpa.entity.Permission;
+import org.bana.service.AbstractPermissionService;
 import org.casbin.jcasbin.main.Enforcer;
 import org.springframework.transaction.annotation.Transactional;
 

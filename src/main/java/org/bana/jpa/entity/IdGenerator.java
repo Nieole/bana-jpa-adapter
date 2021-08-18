@@ -1,4 +1,4 @@
-package org.bana.entity;
+package org.bana.jpa.entity;
 
 import com.github.shamil.Xid;
 import java.io.Serializable;

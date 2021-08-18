@@ -1,9 +1,11 @@
-package org.bana.service;
+package org.bana.jpa.service;
 
 import java.io.Serializable;
 import org.bana.adapter.DataAdapter;
 import org.bana.entity.RoleEntity;
-import org.bana.entity.User;
+import org.bana.jpa.entity.User;
+import org.bana.service.AbstractRoleService;
+import org.bana.service.AbstractUserService;
 import org.casbin.jcasbin.main.Enforcer;
 import org.springframework.transaction.annotation.Transactional;
 

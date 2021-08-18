@@ -1,14 +1,15 @@
-package org.bana.entity;
+package org.bana.jpa.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.bana.entity.CasbinRule;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Permission extends PermissionEntity<String> {
+public class JpaRule extends CasbinRule<String> {
 
   @Id
   @Column(length = 40)
@@ -22,10 +23,5 @@ public class Permission extends PermissionEntity<String> {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  @Override
-  public String id() {
-    return id;
   }
 }

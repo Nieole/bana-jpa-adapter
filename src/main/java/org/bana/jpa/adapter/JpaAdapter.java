@@ -1,7 +1,8 @@
-package org.bana.adapter;
+package org.bana.jpa.adapter;
 
 import java.io.Serializable;
 import java.util.Collection;
+import org.bana.adapter.DataAdapter;
 import org.bana.entity.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

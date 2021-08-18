@@ -1,12 +1,12 @@
-package org.bana.repository;
+package org.bana.jpa.repository;
 
-import org.bana.entity.Role;
+import org.bana.jpa.entity.Permission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, String>,
-    JpaSpecificationExecutor<Role> {
+public interface PermissionRepository extends JpaRepository<Permission, String>,
+    JpaSpecificationExecutor<Permission> {
 
 }

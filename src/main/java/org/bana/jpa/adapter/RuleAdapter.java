@@ -1,20 +1,21 @@
-package org.bana.adapter;
+package org.bana.jpa.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.Predicate;
-import org.bana.entity.JpaRule;
-import org.bana.repository.JpaRuleRepository;
+import org.bana.adapter.Adapter;
+import org.bana.jpa.entity.JpaRule;
+import org.bana.jpa.repository.JpaRuleRepository;
 import org.casbin.jcasbin.model.Assertion;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-public class JpaRuleAdapter implements Adapter<JpaRule> {
+public class RuleAdapter implements Adapter<JpaRule> {
 
   private final JpaRuleRepository jpaRuleRepository;
   private volatile boolean isFiltered = true;
 
-  public JpaRuleAdapter(JpaRuleRepository jpaRuleRepository) {
+  public RuleAdapter(JpaRuleRepository jpaRuleRepository) {
     this.jpaRuleRepository = jpaRuleRepository;
   }
 
