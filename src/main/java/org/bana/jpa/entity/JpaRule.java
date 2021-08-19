@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import org.bana.entity.CasbinRule;
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity
+@Entity(name = "rule")
 public class JpaRule extends CasbinRule<String> {
 
   @Id
